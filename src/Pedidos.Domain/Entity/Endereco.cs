@@ -2,7 +2,7 @@
 
 namespace Pedidos.Domain.Entity
 {
-    public class Endereco : Entidade
+    public class Endereco : EntityBase
     {
         public string Cep { get; set; }
         public string Logradouro { get; set; }

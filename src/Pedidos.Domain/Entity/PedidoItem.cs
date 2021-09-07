@@ -2,7 +2,7 @@
 
 namespace Pedidos.Domain.Entity
 {
-    public class PedidoItem : Entidade
+    public class PedidoItem : EntityBase
     {
         public int PedidoId { get; set; }
         public Pedido Pedido { get; set; }

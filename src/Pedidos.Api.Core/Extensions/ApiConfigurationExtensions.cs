@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
+using Pedidos.Domain.Repositories.Base;
+using Pedidos.Persistence.Repositories.Base;
 
 namespace Pedidos.Api.Core.Extensions
 {
@@ -11,19 +12,14 @@ namespace Pedidos.Api.Core.Extensions
         public static void AddApiConfiguration(this IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Pedidos.Api", Version = "v1" });
-            });
+            services.AddTransient(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
         }
 
         public static void UseApiConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pedidos.Api v1"));
+                app.UseDeveloperExceptionPage();                
             }
 
             app.UseHttpsRedirection();

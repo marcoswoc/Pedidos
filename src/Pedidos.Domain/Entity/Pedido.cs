@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Pedidos.Domain.Entity
 {
-    public class Pedido : Entidade
+    public class Pedido : EntityBase
     {
         public long Codigo { get; set; }
         public int ClienteId { get; set; }

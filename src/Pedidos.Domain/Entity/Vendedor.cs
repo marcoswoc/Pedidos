@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Pedidos.Domain.Entity
 {
-    public class Vendedor : Entidade
+    public class Vendedor : EntityBase
     {
         public string Nome { get; set; }
         public ICollection<Pedido> Pedidos {  get; set; }

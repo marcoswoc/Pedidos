@@ -19,11 +19,13 @@ namespace Pedidos.Api
         {
             services.AddApiConfiguration();
             services.AddSqlDatabase(Configuration);
+            services.AddSwagger();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseApiConfiguration(env);
+            app.UseSwaggerDoc();
         }
     }
 }

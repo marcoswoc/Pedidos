@@ -3,7 +3,7 @@ using Pedidos.Domain.Enums;
 
 namespace Pedidos.Domain.Entity
 {
-    public class Produto : Entidade
+    public class Produto : EntityBase
     {
         public string Nome { get; set; }
         public string Descricao { get; set; }
