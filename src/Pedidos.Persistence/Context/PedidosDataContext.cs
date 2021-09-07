@@ -48,7 +48,9 @@ namespace Pedidos.Persistence.Context
                 p.Property(p => p.Nome).HasMaxLength(60).IsRequired();
                 p.Property(p => p.QuantidadeDisponivel).IsRequired();
                 p.Property(p => p.UnidadeMedida).HasConversion<string>().HasMaxLength(20).IsRequired();
-                p.Property(p => p.Valor).IsRequired();
+                p.Property(p => p.Valor).HasColumnType("DECIMAL(18,2)").IsRequired();
+                p.Property(p => p.Descricao).HasMaxLength(512);
+                p.Property(p => p.Ativo).HasColumnType("bit").HasDefaultValue(false);
             });
 
             modelBuilder.Entity<Pedido>(p =>
@@ -56,14 +58,14 @@ namespace Pedidos.Persistence.Context
                 p.ToTable("Pedidos");
                 p.HasKey(p => p.Id);
                 p.Property(p => p.DataHoraInicio).HasDefaultValueSql("GETDATE()").ValueGeneratedOnAdd();
-                p.Property(p => p.Codigo).IsRequired();
+                p.Property(p => p.Codigo);
                 p.Property(p => p.DataHoraFim);
-                p.Property(p => p.Observacao).HasColumnType("VARCHAR(512)");
-                p.Property(p => p.ValorPago);
-                p.Property(p => p.ValorTotal).IsRequired();
+                p.Property(p => p.Observacao).HasMaxLength(512);
+                p.Property(p => p.ValorPago).HasColumnType("DECIMAL(18,2)"); 
+                p.Property(p => p.ValorTotal).HasColumnType("DECIMAL(18,2)").IsRequired();
                 p.Property(p => p.StatusPedido).HasConversion<string>().HasMaxLength(20).IsRequired();
                 p.Property(p => p.TipoPagamento).HasConversion<string>().HasMaxLength(20).IsRequired();
-                p.Property(p => p.Pagamento).HasColumnType("BIT").IsRequired();
+                p.Property(p => p.Pagamento).HasColumnType("bit").HasDefaultValue(false);
                 
                 p.HasMany(p => p.Itens)
                     .WithOne(p => p.Pedido)
@@ -75,7 +77,7 @@ namespace Pedidos.Persistence.Context
                 p.ToTable("PedidoItens");
                 p.HasKey(p => p.Id);
                 p.Property(p => p.Quantidade).HasDefaultValue(1).IsRequired();
-                p.Property(p => p.Valor).IsRequired();                
+                p.Property(p => p.Valor).HasColumnType("DECIMAL(18,2)").IsRequired();                
             });
 
             modelBuilder.Entity<Endereco>(p =>
@@ -85,9 +87,9 @@ namespace Pedidos.Persistence.Context
                 p.Property(p => p.Bairro).HasMaxLength(80);
                 p.Property(p => p.Cep).HasColumnType("CHAR(8)");
                 p.Property(p => p.Cidade).HasMaxLength(80);
-                p.Property(p => p.Complemento).HasColumnType("VARCHAR(250)");
+                p.Property(p => p.Complemento).HasMaxLength(250);
                 p.Property(p => p.Logradouro).HasMaxLength(80);
-                p.Property(p  => p.Numero).IsRequired();
+                p.Property(p  => p.Numero).HasMaxLength(10).IsRequired();
                 p.Property(p => p.Uf).HasColumnType("CHAR(2)");
             });
         }

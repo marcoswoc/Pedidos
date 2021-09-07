@@ -15,7 +15,6 @@ namespace Pedidos.Api.Core.Extensions
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Pedidos.Api", Version = "v1" });
             });
-
         }
 
         public static void UseApiConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)

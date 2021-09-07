@@ -18,6 +18,7 @@ namespace Pedidos.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApiConfiguration();
+            services.AddSqlDatabase(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
