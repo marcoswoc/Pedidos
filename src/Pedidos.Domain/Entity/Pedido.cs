@@ -1,9 +1,9 @@
-﻿using Pedidos.Persistence.Entity.Base;
-using Pedidos.Persistence.Entity.ValueObjects;
+﻿using Pedidos.Domain.Entity.Base;
+using Pedidos.Domain.Enums;
 using System;
 using System.Collections.Generic;
 
-namespace Pedidos.Persistence.Entity
+namespace Pedidos.Domain.Entity
 {
     public class Pedido : Entidade
     {

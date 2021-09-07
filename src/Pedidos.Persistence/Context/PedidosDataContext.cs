@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Pedidos.Persistence.Entity;
+using Pedidos.Domain.Entity;
 
 namespace Pedidos.Persistence.Context
 {
@@ -10,6 +10,13 @@ namespace Pedidos.Persistence.Context
         {
 
         }
+
+        public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Vendedor> Vendedores { get; set; }
+        public DbSet<Endereco> Endereco { get; set; }
+        public DbSet<PedidoItem> PedidoItens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

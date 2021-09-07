@@ -1,11 +1,6 @@
-﻿using Pedidos.Persistence.Entity.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Pedidos.Domain.Entity.Base;
 
-namespace Pedidos.Persistence.Entity
+namespace Pedidos.Domain.Entity
 {
     public class PedidoItem : Entidade
     {

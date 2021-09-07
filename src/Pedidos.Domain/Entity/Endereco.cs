@@ -1,6 +1,6 @@
-﻿using Pedidos.Persistence.Entity.Base;
+﻿using Pedidos.Domain.Entity.Base;
 
-namespace Pedidos.Persistence.Entity
+namespace Pedidos.Domain.Entity
 {
     public class Endereco : Entidade
     {

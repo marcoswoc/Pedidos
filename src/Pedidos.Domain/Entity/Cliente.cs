@@ -1,8 +1,7 @@
-﻿using Pedidos.Persistence.Entity.Base;
-using System;
+﻿using Pedidos.Domain.Entity.Base;
 using System.Collections.Generic;
 
-namespace Pedidos.Persistence.Entity
+namespace Pedidos.Domain.Entity
 {
     public class Cliente : Entidade
     {

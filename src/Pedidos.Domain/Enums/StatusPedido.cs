@@ -1,4 +1,4 @@
-﻿namespace Pedidos.Persistence.Entity.ValueObjects
+﻿namespace Pedidos.Domain.Enums
 {
     public enum StatusPedido
     {

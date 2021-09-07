@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Pedidos.Persistence.Entity.Base
+namespace Pedidos.Domain.Entity.Base
 {
     public class Entidade
     {
