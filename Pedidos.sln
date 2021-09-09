@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31521.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pedidos.Domain", "src\Pedidos.Domain\Pedidos.Domain.csproj", "{47A1A5E6-611D-4EC0-8E3B-FAECD10D0566}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pedidos.Domain", "src\Pedidos.Domain\Pedidos.Domain.csproj", "{47A1A5E6-611D-4EC0-8E3B-FAECD10D0566}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pedidos.Api.Core", "src\Pedidos.Api.Core\Pedidos.Api.Core.csproj", "{2FA37C5D-6F2B-49D6-8176-3059721BEB84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pedidos.Api.Core", "src\Pedidos.Api.Core\Pedidos.Api.Core.csproj", "{2FA37C5D-6F2B-49D6-8176-3059721BEB84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pedidos.Persistence", "src\Pedidos.Persistence\Pedidos.Persistence.csproj", "{3FD449E2-8FA6-4C17-9C3D-C505F1BE12B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pedidos.Persistence", "src\Pedidos.Persistence\Pedidos.Persistence.csproj", "{3FD449E2-8FA6-4C17-9C3D-C505F1BE12B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pedidos.Api", "src\Pedidos.Api\Pedidos.Api.csproj", "{2DE4342B-DA8F-4855-8075-EBBB9753B516}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pedidos.Api", "src\Pedidos.Api\Pedidos.Api.csproj", "{2DE4342B-DA8F-4855-8075-EBBB9753B516}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pedidos.Application", "src\Pedidos.Application\Pedidos.Application.csproj", "{4501CE45-26ED-4305-ACDD-CC938B0EADCA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{2DE4342B-DA8F-4855-8075-EBBB9753B516}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DE4342B-DA8F-4855-8075-EBBB9753B516}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DE4342B-DA8F-4855-8075-EBBB9753B516}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4501CE45-26ED-4305-ACDD-CC938B0EADCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4501CE45-26ED-4305-ACDD-CC938B0EADCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4501CE45-26ED-4305-ACDD-CC938B0EADCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4501CE45-26ED-4305-ACDD-CC938B0EADCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
