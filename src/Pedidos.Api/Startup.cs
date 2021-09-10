@@ -20,6 +20,7 @@ namespace Pedidos.Api
             services.AddApiConfiguration();
             services.AddSqlDatabase(Configuration);
             services.AddSwagger();
+            services.AddAutoMapperSetup();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

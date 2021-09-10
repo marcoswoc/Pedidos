@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Pedidos.Domain\Pedidos.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
 </Project>

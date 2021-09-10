@@ -19,16 +19,18 @@ namespace Pedidos.Persistence.Repositories.Base
             _context = context;
         }
 
-        public async Task AddAsync(T entity)
+        public async Task<T> AddAsync(T entity)
         {
             _context.Set<T>().Add(entity);
             await _context.SaveChangesAsync();
+            return entity;
         }
 
-        public async Task AddRangeAsync(IEnumerable<T> entities)
+        public async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities)
         {
             _context.Set<T>().AddRange(entities);
             await _context.SaveChangesAsync();
+            return entities;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
@@ -46,16 +48,19 @@ namespace Pedidos.Persistence.Repositories.Base
             return await _context.Set<T>().Where(predicate).ToListAsync();
         }
 
-        public async Task RemoveAsync(T entity)
+        public async Task RemoveAsync(int id)
         {
+            var entity = await _context.Set<T>().FindAsync(id);
+
             _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(T entity)
+        public async Task<T> UpdateAsync(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            return entity;
         }
     }
 }

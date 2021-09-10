@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Pedidos.Api.Core\Pedidos.Api.Core.csproj" />
     <ProjectReference Include="..\Pedidos.Domain\Pedidos.Domain.csproj" />
   </ItemGroup>

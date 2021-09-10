@@ -1,8 +1,9 @@
-﻿using Pedidos.Domain.Enums;
+﻿using Pedidos.Application.Models.Base;
+using Pedidos.Domain.Enums;
 
 namespace Pedidos.Application.Models.Produto
 {
-    public class ProdutoDto
+    public class ProdutoDto : IModelBase
     {
         public string Nome { get; set; }
         public string Descricao { get; set; }

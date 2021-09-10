@@ -1,4 +1,5 @@
-﻿using Pedidos.Application.Models.Cliente;
+﻿using Pedidos.Application.Models.Base;
+using Pedidos.Application.Models.Cliente;
 using Pedidos.Application.Models.PedidoItem;
 using Pedidos.Application.Models.Vendedor;
 using Pedidos.Domain.Enums;
@@ -7,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Pedidos.Application.Models.Pedido
 {
-    public class PedidoDto
+    public class PedidoDto : IModelBase
     {
         public long Codigo { get; set; }
         public int ClienteId { get; set; }
