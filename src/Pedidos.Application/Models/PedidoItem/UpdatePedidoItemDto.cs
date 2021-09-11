@@ -1,8 +1,6 @@
-﻿using Pedidos.Application.Models.Produto;
-
-namespace Pedidos.Application.Models.PedidoItem
+﻿namespace Pedidos.Application.Models.PedidoItem
 {
-    public class UpdatePedidoItemDto : CreateProdutoDto
+    public class UpdatePedidoItemDto : CreatePedidoItemDto
     {
         public int Id { get; set; }
     }
