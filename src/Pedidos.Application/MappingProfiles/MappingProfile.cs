@@ -13,8 +13,10 @@ namespace Pedidos.Application.MappingProfiles
     {
         public MappingProfile()
         {
+            //Pedido
             CreateMap<Pedido, PedidoDto>().ReverseMap();
-            CreateMap<Pedido, PedidoDto>().ReverseMap();
+            CreateMap<UpdatePedidoDto, Pedido>();
+            CreateMap<CreatePedidoDto, Pedido>();
 
             //Endereço
             CreateMap<Endereco, EnderecoDto>().ReverseMap();
@@ -26,14 +28,20 @@ namespace Pedidos.Application.MappingProfiles
             CreateMap<UpdateClienteDto, Cliente>();
             CreateMap<CreateClienteDto, Cliente>();
 
+            //Vendedor
             CreateMap<Vendedor, VendedorDto>().ReverseMap();
+            CreateMap<UpdateVendedorDto, Vendedor>();
+            CreateMap<CreateVendedorDto, Vendedor>();
 
-
+            //Produto
             CreateMap<Produto, ProdutoDto>().ReverseMap();
             CreateMap<UpdateProdutoDto, Produto>();
             CreateMap<CreateProdutoDto, Produto>();
             
+            //Pedido Item
             CreateMap<PedidoItem, PedidoItemDto>().ReverseMap();
+            CreateMap<UpdatePedidoItemDto, PedidoItem>();
+            CreateMap<CreatePedidoItemDto, PedidoItem>();
         }
     }
 }

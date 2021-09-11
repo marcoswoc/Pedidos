@@ -20,16 +20,21 @@ namespace Pedidos.Api.Core.Extensions
             {
                 options.JsonSerializerOptions.IgnoreNullValues = true;
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-            });
-            
-            
-            services.AddTransient(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+            });          
+                        
             services.AddTransient<IClienteRepository, ClienteRepository>();
             services.AddTransient<IEnderecoRepository, EnderecoRepository>();
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
+            services.AddTransient<IVendedorRepository, VendedorRepository>();
+            services.AddTransient<IPedidoItemRepository, PedidoItemRepository>();
+            services.AddTransient<IPedidoRepository, PedidoRepository>();
+
             services.AddTransient<IClienteService, ClienteService>();
             services.AddTransient<IEnderecoService, EnderecoService>();
             services.AddTransient<IProdutoService, ProdutoService>();
+            services.AddTransient<IVendedorService, VendedorService>();
+            services.AddTransient<IPedidoItemService, PedidoItemService>();
+            services.AddTransient<IPedidoService, PedidoService>();
         }
 
         public static void UseApiConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
