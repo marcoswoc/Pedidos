@@ -14,6 +14,7 @@ namespace Pedidos.Application.MappingProfiles
         public MappingProfile()
         {
             CreateMap<Pedido, PedidoDto>().ReverseMap();
+            CreateMap<Pedido, PedidoDto>().ReverseMap();
 
             //Endereço
             CreateMap<Endereco, EnderecoDto>().ReverseMap();
@@ -26,7 +27,11 @@ namespace Pedidos.Application.MappingProfiles
             CreateMap<CreateClienteDto, Cliente>();
 
             CreateMap<Vendedor, VendedorDto>().ReverseMap();
+
+
             CreateMap<Produto, ProdutoDto>().ReverseMap();
+            CreateMap<UpdateProdutoDto, Produto>();
+            CreateMap<CreateProdutoDto, Produto>();
             
             CreateMap<PedidoItem, PedidoItemDto>().ReverseMap();
         }

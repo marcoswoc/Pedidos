@@ -8,6 +8,7 @@ using Pedidos.Domain.Repositories;
 using Pedidos.Domain.Repositories.Base;
 using Pedidos.Persistence.Repositories;
 using Pedidos.Persistence.Repositories.Base;
+using System.Text.Json.Serialization;
 
 namespace Pedidos.Api.Core.Extensions
 {
@@ -15,12 +16,20 @@ namespace Pedidos.Api.Core.Extensions
     {
         public static void AddApiConfiguration(this IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.IgnoreNullValues = true;
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
+            
+            
             services.AddTransient(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
             services.AddTransient<IClienteRepository, ClienteRepository>();
             services.AddTransient<IEnderecoRepository, EnderecoRepository>();
+            services.AddTransient<IProdutoRepository, ProdutoRepository>();
             services.AddTransient<IClienteService, ClienteService>();
             services.AddTransient<IEnderecoService, EnderecoService>();
+            services.AddTransient<IProdutoService, ProdutoService>();
         }
 
         public static void UseApiConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
