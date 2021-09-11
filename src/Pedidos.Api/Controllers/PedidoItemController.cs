@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Pedidos.Application.Interfaces;
 using Pedidos.Application.Models.PedidoItem;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Pedidos.Api.Controllers
@@ -21,7 +22,13 @@ namespace Pedidos.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<PedidoItemDto>> AddAsync([FromBody] CreatePedidoItemDto pedidoItemDto)
         {
-            return await _pedidoItemService.AddAsync(pedidoItemDto);
+            return Ok(await _pedidoItemService.AddAsync(pedidoItemDto));
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<PedidoItemDto>>> GetAllAsync()
+        {
+            return Ok(await _pedidoItemService.GetAllAsync());
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using System.Linq;
 
 namespace Pedidos.Api.Core.Extensions
 {
@@ -11,6 +12,7 @@ namespace Pedidos.Api.Core.Extensions
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Pedidos.Api", Version = "v1" });
+                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());                
             });
         }
 

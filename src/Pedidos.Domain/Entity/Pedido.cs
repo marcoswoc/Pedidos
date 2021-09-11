@@ -8,11 +8,8 @@ namespace Pedidos.Domain.Entity
     public class Pedido : EntityBase
     {
         public long Codigo { get; set; }
-        public int ClienteId { get; set; }
-        public Cliente Cliente { get; set; }
-        public int VendedorId { get; set; }
-        public Vendedor Vendedor { get; set; }
-        public ICollection<PedidoItem> Itens { get; set; }
+        public int ClienteId { get; set; }        
+        public int VendedorId { get; set; }        
         public StatusPedido StatusPedido { get; set; }
         public bool Pagamento { get; set; }
         public TipoPagamento TipoPagamento { get; set; }
@@ -21,5 +18,13 @@ namespace Pedidos.Domain.Entity
         public DateTime? DataHoraInicio { get; set; }
         public DateTime? DataHoraFim { get; set; }
         public string Observacao { get; set; }
+        public virtual Cliente Cliente { get; set; }
+        public virtual Vendedor Vendedor { get; set; }
+        public virtual ICollection<PedidoItem> Itens { get; set; }
+
+        public void AdicionarItem(PedidoItem item)
+        {
+            this.Itens.Add(item);
+        }
     }
 }

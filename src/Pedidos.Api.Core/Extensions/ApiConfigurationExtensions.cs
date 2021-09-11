@@ -2,13 +2,12 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Pedidos.Application.Interfaces;
 using Pedidos.Application.Services;
 using Pedidos.Domain.Repositories;
-using Pedidos.Domain.Repositories.Base;
 using Pedidos.Persistence.Repositories;
-using Pedidos.Persistence.Repositories.Base;
-using System.Text.Json.Serialization;
 
 namespace Pedidos.Api.Core.Extensions
 {
@@ -16,12 +15,15 @@ namespace Pedidos.Api.Core.Extensions
     {
         public static void AddApiConfiguration(this IServiceCollection services)
         {
-            services.AddControllers().AddJsonOptions(options =>
-            {
-                options.JsonSerializerOptions.IgnoreNullValues = true;
-                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-            });          
-                        
+            services.AddRouting(options => options.LowercaseUrls = true);
+            services.AddControllers().AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
+
+            
+
             services.AddTransient<IClienteRepository, ClienteRepository>();
             services.AddTransient<IEnderecoRepository, EnderecoRepository>();
             services.AddTransient<IProdutoRepository, ProdutoRepository>();

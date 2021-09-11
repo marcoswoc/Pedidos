@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Pedidos.Application.Interfaces;
 using Pedidos.Application.Models.Pedido;
+using Pedidos.Application.Models.PedidoItem;
 using Pedidos.Domain.Entity;
 using Pedidos.Domain.Repositories;
 using System.Collections.Generic;
@@ -45,6 +46,17 @@ namespace Pedidos.Application.Services
         public async Task<PedidoDto> UpdateAsync(UpdatePedidoDto pedidoDto)
         {
             var pedido = await _pedidoRepository.UpdateAsync(_mapper.Map<Pedido>(pedidoDto));
+            return _mapper.Map<PedidoDto>(pedido);
+        }
+
+        public async Task<PedidoDto> AddItensAsync(int id, CreatePedidoItemDto pedidoItemDto)
+        {
+            var pedido = await _pedidoRepository.GetByIdAsync(id);
+
+            pedido.AdicionarItem(_mapper.Map<PedidoItem>(pedidoItemDto));
+
+            pedido = await _pedidoRepository.UpdateAsync(pedido);
+
             return _mapper.Map<PedidoDto>(pedido);
         }
     }

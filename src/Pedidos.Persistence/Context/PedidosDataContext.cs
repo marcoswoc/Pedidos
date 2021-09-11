@@ -18,6 +18,12 @@ namespace Pedidos.Persistence.Context
         public DbSet<Endereco> Endereco { get; set; }
         public DbSet<PedidoItem> PedidoItens { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+            base.OnConfiguring(optionsBuilder);
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Cliente>(p =>
