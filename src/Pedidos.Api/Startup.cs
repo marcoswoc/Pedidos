@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Pedidos.Api.Core.Extensions;
+using Pedidos.Api.Core.Middlewares;
 
 namespace Pedidos.Api
 {
@@ -25,6 +26,7 @@ namespace Pedidos.Api
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseApiConfiguration(env);
             app.UseSwaggerDoc();
         }
