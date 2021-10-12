@@ -9,7 +9,7 @@ namespace Pedidos.Domain.Repositories.Base
     public interface IRepositoryBase<T> where T : EntityBase
     {
         Task<T> GetByIdAsync(int id);      
-        Task<T> AddAsync(T entity);
+        Task<T> CreateAsync(T entity);
         Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities);
         Task<T> UpdateAsync(T entity);
         Task RemoveAsync(int id);

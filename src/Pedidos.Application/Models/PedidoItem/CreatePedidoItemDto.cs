@@ -5,7 +5,6 @@ namespace Pedidos.Application.Models.PedidoItem
     public class CreatePedidoItemDto : IModelBase
     {
         public int ProdutoId { get; set; }
-        public int Quantidade { get; set; }
-        public decimal Valor { get; set; }
+        public int Quantidade { get; set; }        
     }
 }

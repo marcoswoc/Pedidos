@@ -19,9 +19,9 @@ namespace Pedidos.Application.Services
             _produtoRepository = produtoRepository;
         }
 
-        public async Task<ProdutoDto> AddAsync(CreateProdutoDto ProdutoDto)
+        public async Task<ProdutoDto> CreateAsync(CreateProdutoDto ProdutoDto)
         {
-            var produto = await _produtoRepository.AddAsync(_mapper.Map<Produto>(ProdutoDto));
+            var produto = await _produtoRepository.CreateAsync(_mapper.Map<Produto>(ProdutoDto));
             return _mapper.Map<ProdutoDto>(produto);
         }
 
@@ -42,10 +42,13 @@ namespace Pedidos.Application.Services
             await _produtoRepository.RemoveAsync(id);
         }
 
-        public async Task<ProdutoDto> UpdateAsync(UpdateProdutoDto ProdutoDto)
+        public async Task<ProdutoDto> UpdateAsync(int id, CreateProdutoDto ProdutoDto)
         {
-            var produto = await _produtoRepository.UpdateAsync(_mapper.Map<Produto>(ProdutoDto));
-            return _mapper.Map<ProdutoDto>(produto);
+            var entity = await _produtoRepository.GetByIdAsync(id);
+
+            await _produtoRepository.UpdateAsync(_mapper.Map(ProdutoDto, entity));
+
+            return await GetByIdAsync(id);
         }
 
     }

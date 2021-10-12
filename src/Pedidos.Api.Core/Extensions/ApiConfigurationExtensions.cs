@@ -21,18 +21,14 @@ namespace Pedidos.Api.Core.Extensions
                     options.SerializerSettings.Converters.Add(new StringEnumConverter());
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 });
-
             
-
-            services.AddTransient<IClienteRepository, ClienteRepository>();
-            services.AddTransient<IEnderecoRepository, EnderecoRepository>();
+            services.AddTransient<IClienteRepository, ClienteRepository>();            
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
             services.AddTransient<IVendedorRepository, VendedorRepository>();
             services.AddTransient<IPedidoItemRepository, PedidoItemRepository>();
             services.AddTransient<IPedidoRepository, PedidoRepository>();
 
-            services.AddTransient<IClienteService, ClienteService>();
-            services.AddTransient<IEnderecoService, EnderecoService>();
+            services.AddTransient<IClienteService, ClienteService>();            
             services.AddTransient<IProdutoService, ProdutoService>();
             services.AddTransient<IVendedorService, VendedorService>();
             services.AddTransient<IPedidoItemService, PedidoItemService>();

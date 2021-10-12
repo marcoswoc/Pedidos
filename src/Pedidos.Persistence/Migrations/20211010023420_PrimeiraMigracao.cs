@@ -8,22 +8,24 @@ namespace Pedidos.Persistence.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Enderecos",
+                name: "Clientes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Cep = table.Column<string>(type: "CHAR(8)", nullable: true),
-                    Logradouro = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: true),
-                    Complemento = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    Bairro = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: true),
-                    Cidade = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: true),
-                    Uf = table.Column<string>(type: "CHAR(2)", nullable: true),
-                    Numero = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
+                    Nome = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    Telefone = table.Column<string>(type: "CHAR(11)", nullable: true),
+                    Cep = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Logradouro = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Complemento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Bairro = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cidade = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Uf = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NumeroEndereco = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Enderecos", x => x.Id);
+                    table.PrimaryKey("PK_Clientes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -55,27 +57,6 @@ namespace Pedidos.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vendedores", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Clientes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
-                    Telefone = table.Column<string>(type: "CHAR(11)", nullable: true),
-                    EnderecoId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clientes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Clientes_Enderecos_EnderecoId",
-                        column: x => x.EnderecoId,
-                        principalTable: "Enderecos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -147,11 +128,6 @@ namespace Pedidos.Persistence.Migrations
                 column: "Nome");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Clientes_EnderecoId",
-                table: "Clientes",
-                column: "EnderecoId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PedidoItens_PedidoId",
                 table: "PedidoItens",
                 column: "PedidoId");
@@ -193,9 +169,6 @@ namespace Pedidos.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Vendedores");
-
-            migrationBuilder.DropTable(
-                name: "Enderecos");
         }
     }
 }

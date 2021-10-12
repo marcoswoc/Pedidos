@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Pedidos.Application.Interfaces;
 using Pedidos.Application.Models.Pedido;
 using Pedidos.Application.Models.PedidoItem;
@@ -12,18 +11,18 @@ namespace Pedidos.Api.Controllers
     [Route("api/[controller]")]
     public class PedidosController : Controller
     {
-        private readonly IMapper _mapper;
+
         private readonly IPedidoService _pedidoService;
-        public PedidosController(IMapper mapper, IPedidoService pedidoService)
+
+        public PedidosController(IPedidoService pedidoService)
         {
-            _mapper = mapper;
             _pedidoService = pedidoService;
         }
 
         [HttpPost]
         public async Task<ActionResult<PedidoDto>> AddAsync([FromBody] CreatePedidoDto pedidoDto)
         {
-            return Ok(await _pedidoService.AddAsync(pedidoDto));
+            return Ok(await _pedidoService.CreateAsync(pedidoDto));
         }
 
         [HttpGet]
@@ -32,8 +31,27 @@ namespace Pedidos.Api.Controllers
             return Ok(await _pedidoService.GetAllAsync());
         }
 
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<PedidoDto>> GetByIdAsync(int id)
+        {
+            return Ok(await _pedidoService.GetByIdAsync(id));
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<PedidoDto>> UpdateAsync([FromRoute] int id, [FromBody] CreatePedidoDto pedidoDto)
+        {
+            return Ok(await _pedidoService.UpdateAsync(id, pedidoDto));
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> DeleteAsync(int id)
+        {
+            await _pedidoService.RemoveAsync(id);
+            return NoContent();
+        }
+
         [HttpPost("{id:int}/itens")]
-        public async Task<ActionResult<PedidoDto>> AddItensAsync([FromBody] CreatePedidoItemDto pedidoItemDto, int id)
+        public async Task<ActionResult<PedidoDto>> AddItensAsync([FromRoute] int id, [FromBody] CreatePedidoItemDto pedidoItemDto)
         {
             return Ok(await _pedidoService.AddItensAsync(id, pedidoItemDto));
         }

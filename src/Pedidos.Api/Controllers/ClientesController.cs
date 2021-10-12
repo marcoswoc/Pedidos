@@ -11,7 +11,9 @@ namespace Pedidos.Api.Controllers
     public class ClientesController : Controller
     {
         private readonly IClienteService _clienteService;
-        public ClientesController(IClienteService clienteService)
+
+        public ClientesController(
+            IClienteService clienteService)
         {
             _clienteService = clienteService;
         }
@@ -19,7 +21,7 @@ namespace Pedidos.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<ClienteDto>> CreateAsync([FromBody] CreateClienteDto clienteDto)
         {
-            return Ok(await _clienteService.AddAsync(clienteDto));
+            return Ok(await _clienteService.CreateAsync(clienteDto));
         }
 
         [HttpGet]
@@ -34,10 +36,10 @@ namespace Pedidos.Api.Controllers
             return Ok(await _clienteService.GetByIdAsync(id));
         }
 
-        [HttpPut]
-        public async Task<ActionResult<ClienteDto>> UpdateAsync([FromBody]UpdateClienteDto clienteDto)
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<ClienteDto>> UpdateAsync([FromRoute]int id, [FromBody]CreateClienteDto clienteDto)
         {
-            return Ok(await _clienteService.UpdateAsync(clienteDto));
+            return Ok(await _clienteService.UpdateAsync(id,clienteDto));
         }
 
         [HttpDelete("{id:int}")]

@@ -19,7 +19,7 @@ namespace Pedidos.Persistence.Repositories.Base
             _context = context;
         }
 
-        public async Task<T> AddAsync(T entity)
+        public async Task<T> CreateAsync(T entity)
         {
             _context.Set<T>().Add(entity);
             await _context.SaveChangesAsync();

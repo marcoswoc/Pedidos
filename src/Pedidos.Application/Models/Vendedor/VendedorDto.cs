@@ -2,8 +2,8 @@
 
 namespace Pedidos.Application.Models.Vendedor
 {
-    public class VendedorDto : UpdateVendedorDto, IModelBase
+    public class VendedorDto : CreateVendedorDto, IModelBase
     {
-
+        public int Id { get; set; }
     }
 }

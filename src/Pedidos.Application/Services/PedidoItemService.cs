@@ -19,9 +19,9 @@ namespace Pedidos.Application.Services
             _pedidoItemRepository = pedidoItemRepository;
         }
 
-        public async Task<PedidoItemDto> AddAsync(CreatePedidoItemDto pedidoItemDto)
+        public async Task<PedidoItemDto> CreateAsync(CreatePedidoItemDto pedidoItemDto)
         {
-            var pedidoItem = await _pedidoItemRepository.AddAsync(_mapper.Map<PedidoItem>(pedidoItemDto));
+            var pedidoItem = await _pedidoItemRepository.CreateAsync(_mapper.Map<PedidoItem>(pedidoItemDto));
             return _mapper.Map<PedidoItemDto>(pedidoItem);
         }
 
@@ -42,10 +42,13 @@ namespace Pedidos.Application.Services
             await _pedidoItemRepository.RemoveAsync(id);
         }
 
-        public async Task<PedidoItemDto> UpdateAsync(UpdatePedidoItemDto pedidoItemDto)
+        public async Task<PedidoItemDto> UpdateAsync(int id, CreatePedidoItemDto pedidoItemDto)
         {
-            var pedidoItem = await _pedidoItemRepository.UpdateAsync(_mapper.Map<PedidoItem>(pedidoItemDto));
-            return _mapper.Map<PedidoItemDto>(pedidoItem);
+            var entity = await _pedidoItemRepository.GetByIdAsync(id);
+
+            await _pedidoItemRepository.UpdateAsync(_mapper.Map(pedidoItemDto, entity));
+
+            return await GetByIdAsync(id);
         }
     }
 }

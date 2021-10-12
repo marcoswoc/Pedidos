@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Pedidos.Domain\Pedidos.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Sql\" />
+  </ItemGroup>
+
 </Project>

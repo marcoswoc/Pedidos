@@ -1,10 +1,9 @@
 ﻿using Pedidos.Application.Models.Base;
-using Pedidos.Domain.Enums;
 
 namespace Pedidos.Application.Models.Produto
 {
-    public class ProdutoDto : UpdateProdutoDto, IModelBase
+    public class ProdutoDto : CreateProdutoDto, IModelBase
     {
-        
+        public int Id { get; set; }
     }
 }

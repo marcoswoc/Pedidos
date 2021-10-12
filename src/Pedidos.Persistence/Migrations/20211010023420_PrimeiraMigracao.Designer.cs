@@ -10,7 +10,7 @@ using Pedidos.Persistence.Context;
 namespace Pedidos.Persistence.Migrations
 {
     [DbContext(typeof(PedidosDataContext))]
-    [Migration("20210907175728_PrimeiraMigracao")]
+    [Migration("20211010023420_PrimeiraMigracao")]
     partial class PrimeiraMigracao
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,35 +21,7 @@ namespace Pedidos.Persistence.Migrations
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Pedidos.Persistence.Entity.Cliente", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("EnderecoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
-
-                    b.Property<string>("Telefone")
-                        .HasColumnType("CHAR(11)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EnderecoId");
-
-                    b.HasIndex("Nome")
-                        .HasDatabaseName("idx_cliente_nome");
-
-                    b.ToTable("Clientes");
-                });
-
-            modelBuilder.Entity("Pedidos.Persistence.Entity.Endereco", b =>
+            modelBuilder.Entity("Pedidos.Domain.Entity.Cliente", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,38 +29,43 @@ namespace Pedidos.Persistence.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Bairro")
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Cep")
-                        .HasColumnType("CHAR(8)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Cidade")
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Complemento")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Logradouro")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
                         .HasMaxLength(80)
                         .HasColumnType("nvarchar(80)");
 
-                    b.Property<string>("Numero")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<string>("NumeroEndereco")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefone")
+                        .HasColumnType("CHAR(11)");
 
                     b.Property<string>("Uf")
-                        .HasColumnType("CHAR(2)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Enderecos");
+                    b.HasIndex("Nome")
+                        .HasDatabaseName("idx_cliente_nome");
+
+                    b.ToTable("Clientes");
                 });
 
-            modelBuilder.Entity("Pedidos.Persistence.Entity.Pedido", b =>
+            modelBuilder.Entity("Pedidos.Domain.Entity.Pedido", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -146,7 +123,7 @@ namespace Pedidos.Persistence.Migrations
                     b.ToTable("Pedidos");
                 });
 
-            modelBuilder.Entity("Pedidos.Persistence.Entity.PedidoItem", b =>
+            modelBuilder.Entity("Pedidos.Domain.Entity.PedidoItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -176,7 +153,7 @@ namespace Pedidos.Persistence.Migrations
                     b.ToTable("PedidoItens");
                 });
 
-            modelBuilder.Entity("Pedidos.Persistence.Entity.Produto", b =>
+            modelBuilder.Entity("Pedidos.Domain.Entity.Produto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -213,7 +190,7 @@ namespace Pedidos.Persistence.Migrations
                     b.ToTable("Produtos");
                 });
 
-            modelBuilder.Entity("Pedidos.Persistence.Entity.Vendedor", b =>
+            modelBuilder.Entity("Pedidos.Domain.Entity.Vendedor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -233,27 +210,16 @@ namespace Pedidos.Persistence.Migrations
                     b.ToTable("Vendedores");
                 });
 
-            modelBuilder.Entity("Pedidos.Persistence.Entity.Cliente", b =>
+            modelBuilder.Entity("Pedidos.Domain.Entity.Pedido", b =>
                 {
-                    b.HasOne("Pedidos.Persistence.Entity.Endereco", "Endereco")
+                    b.HasOne("Pedidos.Domain.Entity.Cliente", "Cliente")
                         .WithMany()
-                        .HasForeignKey("EnderecoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Endereco");
-                });
-
-            modelBuilder.Entity("Pedidos.Persistence.Entity.Pedido", b =>
-                {
-                    b.HasOne("Pedidos.Persistence.Entity.Cliente", "Cliente")
-                        .WithMany("Pedidos")
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Pedidos.Persistence.Entity.Vendedor", "Vendedor")
-                        .WithMany("Pedidos")
+                    b.HasOne("Pedidos.Domain.Entity.Vendedor", "Vendedor")
+                        .WithMany()
                         .HasForeignKey("VendedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -263,38 +229,26 @@ namespace Pedidos.Persistence.Migrations
                     b.Navigation("Vendedor");
                 });
 
-            modelBuilder.Entity("Pedidos.Persistence.Entity.PedidoItem", b =>
+            modelBuilder.Entity("Pedidos.Domain.Entity.PedidoItem", b =>
                 {
-                    b.HasOne("Pedidos.Persistence.Entity.Pedido", "Pedido")
+                    b.HasOne("Pedidos.Domain.Entity.Pedido", null)
                         .WithMany("Itens")
                         .HasForeignKey("PedidoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Pedidos.Persistence.Entity.Produto", "Produto")
+                    b.HasOne("Pedidos.Domain.Entity.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Pedido");
-
                     b.Navigation("Produto");
                 });
 
-            modelBuilder.Entity("Pedidos.Persistence.Entity.Cliente", b =>
-                {
-                    b.Navigation("Pedidos");
-                });
-
-            modelBuilder.Entity("Pedidos.Persistence.Entity.Pedido", b =>
+            modelBuilder.Entity("Pedidos.Domain.Entity.Pedido", b =>
                 {
                     b.Navigation("Itens");
-                });
-
-            modelBuilder.Entity("Pedidos.Persistence.Entity.Vendedor", b =>
-                {
-                    b.Navigation("Pedidos");
                 });
 #pragma warning restore 612, 618
         }
