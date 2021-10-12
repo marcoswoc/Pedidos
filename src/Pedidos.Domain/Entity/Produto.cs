@@ -11,5 +11,12 @@ namespace Pedidos.Domain.Entity
         public virtual int QuantidadeDisponivel { get; set; }
         public virtual decimal Valor { get; set; }
         public virtual bool Ativo { get; set; }
+
+        public void AtualizaQuantidadeSituacao(int quantidade)
+        {
+            this.QuantidadeDisponivel -= quantidade;
+
+            if (QuantidadeDisponivel <= 0 ) this.Ativo = false;
+        }
     }
 }

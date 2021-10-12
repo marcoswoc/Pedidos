@@ -25,7 +25,19 @@ namespace Pedidos.Domain.Entity
 
         public void AdicionarItem(PedidoItem item)
         {
-            this.Itens.Add(item);
+            item.CalculaValor();
+
+            var pedidoItem = this.Itens.FirstOrDefault(x => x.ProdutoId == item.ProdutoId);
+
+            if (pedidoItem is null)
+                this.Itens.Add(item);
+            else
+                pedidoItem.AtualizaValor(item);
+
+            item.Produto.AtualizaQuantidadeSituacao(item.Quantidade);
+            this.CalculaValorTotal();
         }
+
+        private void CalculaValorTotal() => this.ValorTotal = this.Itens.Sum(itens => itens.Valor);
     }
 }

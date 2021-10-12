@@ -13,13 +13,16 @@ namespace Pedidos.Application.Services
     {
         private readonly IMapper _mapper;
         private readonly IPedidoRepository _pedidoRepository;
+        private readonly IProdutoRepository _produtoRepository;
 
         public PedidoService(
             IMapper mapper,
-            IPedidoRepository pedidoRepository)
+            IPedidoRepository pedidoRepository,
+            IProdutoRepository produtoRepository)
         {
             _mapper = mapper;
             _pedidoRepository = pedidoRepository;
+            _produtoRepository = produtoRepository;
         }
 
         public async Task<PedidoDto> CreateAsync(CreatePedidoDto pedidoDto)
@@ -56,13 +59,15 @@ namespace Pedidos.Application.Services
 
         public async Task<PedidoDto> AddItensAsync(int id, CreatePedidoItemDto pedidoItemDto)
         {
-            var pedido = await _pedidoRepository.GetByIdAsync(id);
+            var pedido = await _pedidoRepository.GetByIdAsync(id); 
+            var pedidoItem = _mapper.Map<PedidoItem>(pedidoItemDto);
+            pedidoItem.Produto = await _produtoRepository.GetByIdAsync(pedidoItemDto.ProdutoId);
 
-            pedido.AdicionarItem(_mapper.Map<PedidoItem>(pedidoItemDto));
+            pedido.AdicionarItem(pedidoItem);
 
-            pedido = await _pedidoRepository.UpdateAsync(pedido);
+            await _pedidoRepository.UpdateAsync(pedido);
 
-            return _mapper.Map<PedidoDto>(pedido);
+            return await GetByIdAsync(id);
         }
     }
 }
