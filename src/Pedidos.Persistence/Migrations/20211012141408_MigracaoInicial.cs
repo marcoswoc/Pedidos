@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Pedidos.Persistence.Migrations
 {
-    public partial class PrimeiraMigracao : Migration
+    public partial class MigracaoInicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,13 +15,13 @@ namespace Pedidos.Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
                     Telefone = table.Column<string>(type: "CHAR(11)", nullable: true),
-                    Cep = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Logradouro = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Complemento = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Bairro = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Cidade = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Uf = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NumeroEndereco = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Cep = table.Column<string>(type: "CHAR(8)", nullable: true),
+                    Logradouro = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: true),
+                    Complemento = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Bairro = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: true),
+                    Cidade = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: true),
+                    Uf = table.Column<string>(type: "CHAR(2)", nullable: true),
+                    NumeroEndereco = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
                 },
                 constraints: table =>
                 {

@@ -31,6 +31,13 @@ namespace Pedidos.Persistence.Context
                 p.HasKey(p => p.Id);
                 p.Property(p => p.Nome).HasMaxLength(80).IsRequired();
                 p.Property(p => p.Telefone).HasColumnType("CHAR(11)");
+                p.Property(p => p.Bairro).HasMaxLength(80);
+                p.Property(p => p.Cep).HasColumnType("CHAR(8)");
+                p.Property(p => p.Cidade).HasMaxLength(80);
+                p.Property(p => p.Complemento).HasMaxLength(250);
+                p.Property(p => p.Logradouro).HasMaxLength(80);
+                p.Property(p => p.NumeroEndereco).HasMaxLength(10).IsRequired();
+                p.Property(p => p.Uf).HasColumnType("CHAR(2)");
 
                 p.HasIndex(i => i.Nome).HasDatabaseName("idx_cliente_nome");
             });

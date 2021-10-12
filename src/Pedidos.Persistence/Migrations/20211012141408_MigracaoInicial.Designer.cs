@@ -10,8 +10,8 @@ using Pedidos.Persistence.Context;
 namespace Pedidos.Persistence.Migrations
 {
     [DbContext(typeof(PedidosDataContext))]
-    [Migration("20211010023420_PrimeiraMigracao")]
-    partial class PrimeiraMigracao
+    [Migration("20211012141408_MigracaoInicial")]
+    partial class MigracaoInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,19 +29,23 @@ namespace Pedidos.Persistence.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Bairro")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
 
                     b.Property<string>("Cep")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("CHAR(8)");
 
                     b.Property<string>("Cidade")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
 
                     b.Property<string>("Complemento")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("Logradouro")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -49,13 +53,15 @@ namespace Pedidos.Persistence.Migrations
                         .HasColumnType("nvarchar(80)");
 
                     b.Property<string>("NumeroEndereco")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Telefone")
                         .HasColumnType("CHAR(11)");
 
                     b.Property<string>("Uf")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("CHAR(2)");
 
                     b.HasKey("Id");
 
