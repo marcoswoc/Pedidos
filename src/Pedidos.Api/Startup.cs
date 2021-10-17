@@ -18,7 +18,7 @@ namespace Pedidos.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddApiConfiguration();
+            services.AddApiConfiguration(Configuration);
             services.AddSqlDatabase(Configuration);
             services.AddSwagger();
             services.AddAutoMapperSetup();

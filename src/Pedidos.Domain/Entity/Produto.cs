@@ -4,7 +4,7 @@ using Pedidos.Domain.Enums;
 namespace Pedidos.Domain.Entity
 {
     public class Produto : EntityBase
-    {
+    {        
         public virtual string Nome { get; set; }
         public virtual string Descricao { get; set; }
         public virtual UnidadeMedida UnidadeMedida { get; set; }

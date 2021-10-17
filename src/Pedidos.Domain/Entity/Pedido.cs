@@ -7,7 +7,7 @@ using System.Linq;
 namespace Pedidos.Domain.Entity
 {
     public class Pedido : EntityBase
-    {
+    {        
         public virtual long Codigo { get; set; }
         public virtual int ClienteId { get; set; }   
         public virtual Cliente Cliente { get; set; }

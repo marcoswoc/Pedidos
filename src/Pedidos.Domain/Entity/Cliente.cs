@@ -3,7 +3,7 @@
 namespace Pedidos.Domain.Entity
 {
     public class Cliente : EntityBase
-    {
+    {        
         public virtual string Nome { get; set; }
         public virtual string Telefone { get; set; }
         public virtual string Cep { get; set; }

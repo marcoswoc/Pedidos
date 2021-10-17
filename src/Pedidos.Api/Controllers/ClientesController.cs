@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Pedidos.Application.Interfaces;
 using Pedidos.Application.Models.Base;
@@ -9,6 +11,7 @@ using System.Threading.Tasks;
 namespace Pedidos.Api.Controllers
 {
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [ProducesResponseType(typeof(ErrorModel), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ErrorModel), StatusCodes.Status404NotFound)]
     [Route("api/[controller]")]
@@ -28,7 +31,7 @@ namespace Pedidos.Api.Controllers
             return Ok(await _clienteService.CreateAsync(clienteDto));
         }
 
-        [HttpGet]
+        [HttpGet]        
         [ProducesResponseType(typeof(IEnumerable<ClienteDto>), StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<ClienteDto>>> GetAllAsync()
         {

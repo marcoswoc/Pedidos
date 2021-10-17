@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Pedidos.Domain.Entity;
 
 namespace Pedidos.Persistence.Context
 {
-    public class PedidosDataContext : DbContext
+    public class PedidosDataContext : IdentityDbContext
     {
         public PedidosDataContext(DbContextOptions<PedidosDataContext> options) 
             : base(options)
@@ -11,11 +12,11 @@ namespace Pedidos.Persistence.Context
 
         }
 
-        public DbSet<Pedido> Pedidos { get; set; }
-        public DbSet<Produto> Produtos { get; set; }
-        public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<Vendedor> Vendedores { get; set; }
-        public DbSet<PedidoItem> PedidoItens { get; set; }
+        public virtual DbSet<Pedido> Pedidos { get; set; }
+        public virtual DbSet<Produto> Produtos { get; set; }
+        public virtual DbSet<Cliente> Clientes { get; set; }
+        public virtual DbSet<Vendedor> Vendedores { get; set; }
+        public virtual DbSet<PedidoItem> PedidoItens { get; set; }        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -87,7 +88,7 @@ namespace Pedidos.Persistence.Context
                 p.Property(p => p.Valor).HasColumnType("DECIMAL(18,2)").IsRequired();
             });
 
+            base.OnModelCreating(modelBuilder);
         }
-
     }
 }

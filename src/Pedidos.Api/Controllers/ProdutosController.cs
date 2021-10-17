@@ -1,15 +1,16 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Pedidos.Application.Interfaces;
 using Pedidos.Application.Models.Base;
 using Pedidos.Application.Models.Produto;
-using Pedidos.Application.Models.Vendedor;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Pedidos.Api.Controllers
 {
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [ProducesResponseType(typeof(ErrorModel), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ErrorModel), StatusCodes.Status404NotFound)]
     [Route("api/[controller]")]

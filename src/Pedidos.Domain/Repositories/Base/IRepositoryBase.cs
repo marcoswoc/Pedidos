@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pedidos.Domain.Repositories.Base
 {
-    public interface IRepositoryBase<T> where T : EntityBase
+    public interface IRepositoryBase<T> where T : IEntityBase
     {
         Task<T> GetByIdAsync(int id);      
         Task<T> CreateAsync(T entity);

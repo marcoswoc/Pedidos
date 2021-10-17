@@ -3,7 +3,7 @@
 namespace Pedidos.Domain.Entity
 {
     public class PedidoItem : EntityBase
-    {
+    {        
         public virtual int PedidoId { get; set; }
         public virtual int ProdutoId { get; set; }
         public virtual Produto Produto { get; set; }
